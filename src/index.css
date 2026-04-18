@@ -1,0 +1,139 @@
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
+
+@theme {
+  --font-sans: "Outfit", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "Space Grotesk", ui-monospace, SFMono-Regular, monospace;
+}
+
+:root {
+  --c: #00e5ff; /* cyan */
+  --p: #7c3aed; /* purple */
+  --pk: #f43f5e; /* pink */
+  --g: #10b981; /* green */
+  --bg-dark: #030712;
+  --bg-darker: #060d1f;
+}
+
+body {
+  background-color: var(--bg-dark);
+  color: #fff;
+  overflow-x: hidden;
+  font-family: var(--font-sans);
+}
+
+/* CSS Noise Texture */
+.noise-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 10;
+  pointer-events: none;
+  opacity: 0.03;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
+
+/* Animations */
+@keyframes fadeDown {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideDown {
+  from { opacity: 0; height: 0; transform: translateY(-10px); }
+  to { opacity: 1; height: auto; transform: translateY(0); }
+}
+
+@keyframes livePulse {
+  0% { transform: scale(1); opacity: 0.8; }
+  50% { transform: scale(1.5); opacity: 1; box-shadow: 0 0 10px var(--c); }
+  100% { transform: scale(1); opacity: 0.8; }
+}
+
+@keyframes gradShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes numPop {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1); }
+}
+
+@keyframes ringOut {
+  0% { transform: scale(0.8); opacity: 0; border-width: 10px; }
+  50% { opacity: 0.5; }
+  100% { transform: scale(1.5); opacity: 0; border-width: 1px; }
+}
+
+@keyframes checkIn {
+  from { transform: scale(0) rotate(-45deg); opacity: 0; }
+  to { transform: scale(1) rotate(0); opacity: 1; }
+}
+
+@keyframes sucPop {
+  from { transform: scale(0.9) translateY(40px); opacity: 0; }
+  to { transform: scale(1) translateY(0); opacity: 1; }
+}
+
+.animate-fadeDown { animation: fadeDown 0.6s ease-out forwards; }
+.animate-fadeUp { animation: fadeUp 0.8s ease-out 0.15s forwards; opacity: 0; }
+.animate-livePulse { animation: livePulse 2s infinite; }
+.animate-gradShift { background-size: 200% 200%; animation: gradShift 3s linear infinite; }
+.animate-spin-slow { animation: spin 10s linear infinite; }
+.animate-numPop { animation: numPop 0.3s ease-out; }
+.animate-ringOut { animation: ringOut 2s ease-out infinite; }
+.animate-checkIn { animation: checkIn 0.5s cubic-bezier(0.19, 1, 0.22, 1) forwards; }
+.animate-sucPop { animation: sucPop 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards; }
+
+.glass {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.neon-border-top {
+  position: relative;
+}
+
+.neon-border-top::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--c), var(--p));
+  box-shadow: 0 0 15px var(--c);
+  z-index: 10;
+}
+
+.grid-overlay {
+  background-image: linear-gradient(var(--c) 1px, transparent 1px), linear-gradient(90deg, var(--c) 1px, transparent 1px);
+  background-size: 40px 40px;
+  mask-image: radial-gradient(circle at 50% 50%, black, transparent 80%);
+  opacity: 0.05;
+}
+
+.trust-badge {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+/* Hide scrollbar */
+::-webkit-scrollbar { width: 0px; background: transparent; }
+
